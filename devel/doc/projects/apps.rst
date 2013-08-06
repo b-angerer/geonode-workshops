@@ -201,7 +201,7 @@ Next write the views to drive the URL patterns we configured above. Edit polls/v
 
 .. code-block:: python
 
-    from django.template import Context, loader
+    from django.template import RequestContext, loader
     from polls.models import Poll
     from django.http import HttpResponse
     from django.http import Http404
@@ -347,6 +347,8 @@ Next we need to configure our project to add Zinnia's URL configurations. Add th
 
 If you visit the main blog page in your browser at http://localhost:8000/blog/ you will find that the blog displays with Zinnia's default theme as shown below.
 
+.. note:: If you are not able to visit the main blog page, you will have to set ``USE_TZ = True`` in settings.py. Restart the server and try again!
+
 .. figure:: img/zinnia_default.png 
 
 This page includes some guidance for us on how to change the default theme. The first thing we need to do is to copy Zinnia's :file:`base.html` template into our own project so we can modify it. When you installed Zinnia, templates were installed to :file:`/var/lib/geonode/lib/python2.7/site-packages/zinnia/templates/zinnia/`. You can copy the base template by executing the following commands:
@@ -395,7 +397,7 @@ The last thing we need to do to fully integrate this blog app (and our polls app
         <a href="/polls/">Polls</a>
     </li>
     <li id="nav_blog">
-        <a href="{% url zinnia_entry_archive_index %}">Blog</a>
+        <a href="{% url 'zinnia_entry_archive_index' %}">Blog</a>
     </li>
     {% endblock %}
 
